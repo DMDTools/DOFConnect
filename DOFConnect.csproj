@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <!-- <PublishSingleFile>true</PublishSingleFile> -->
+    <SelfContained>true</SelfContained>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <ImplicitUsings>true</ImplicitUsings>
+    <OutputType>Library</OutputType>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Unbroken.LaunchBox.Plugins">
+      <HintPath>deps\Unbroken.LaunchBox.Plugins.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

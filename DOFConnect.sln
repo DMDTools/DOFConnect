@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOFConnect", "DOFConnect.csproj", "{ECE3942C-B269-4F53-859F-CC36690E12A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECE3942C-B269-4F53-859F-CC36690E12A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECE3942C-B269-4F53-859F-CC36690E12A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECE3942C-B269-4F53-859F-CC36690E12A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECE3942C-B269-4F53-859F-CC36690E12A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {501CA0D8-50D1-47D9-A9C0-3351B31A66A7}
+	EndGlobalSection
+EndGlobal
