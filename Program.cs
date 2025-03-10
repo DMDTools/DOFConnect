@@ -5,13 +5,16 @@ namespace DOFConnect
     using Unbroken.LaunchBox.Plugins;
     using Unbroken.LaunchBox.Plugins.Data;
     using System.IO.Pipes;
+    using System.Text.Json;
+    using System.Reflection;
 
     // Class to handle system events in LaunchBox/BigBox
     public partial class SystemEvents : ISystemEventsPlugin
     {
         string gCurrentGame = "";
         string gCurrentPlatform = "platforms";
-        string gCurrentEmulator = "";
+        string gCurrentCategory = "";
+        Boolean UseEmulator = true;
 
         public void OnEventRaised(string eventType)
         {
@@ -19,7 +22,8 @@ namespace DOFConnect
             switch (eventType)
             {
                 case SystemEventTypes.PluginInitialized:
-                    // Do nothing
+                    // Load the configuration
+                    LoadConfig();
                     break;
                 case SystemEventTypes.LaunchBoxStartupCompleted:
                     // Play cabinet's marquee, per the configuration
@@ -45,6 +49,23 @@ namespace DOFConnect
             }
         }
 
+        public class DOFConnectConfig
+        {
+            public string CategorySource { get; set; }
+        }
+
+        // Load up the configuration details
+        private void LoadConfig()
+        {
+            using (StreamReader r = new StreamReader(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)+"\\DOFConnect.json"))
+            { 
+                string json = r.ReadToEnd();
+                DOFConnectConfig config = JsonSerializer.Deserialize<DOFConnectConfig>(json);
+                if (config.CategorySource == "Platform") UseEmulator = false;
+                sendMsg($"INFO=DOFConnect v3 category set to {config.CategorySource}");
+            }
+        }
+
         // Helper method to handle selection changes
         private void HandleSelectionChanged()
         {
@@ -59,8 +80,15 @@ namespace DOFConnect
                 if (gCurrentGame != CleanGameName(game.ApplicationPath))
                 {
                     gCurrentGame = CleanGameName(game.ApplicationPath);
-                    gCurrentEmulator = emulator.Title;
-                    sendMenuRom(gCurrentEmulator, gCurrentGame);
+                    if (UseEmulator) 
+                    { 
+                        gCurrentCategory = emulator.Title;
+                    }
+                    else
+                    {
+                        gCurrentCategory = game.Platform;
+                    }
+                    sendMenuRom(gCurrentCategory, gCurrentGame);
                 }
             }
             else
